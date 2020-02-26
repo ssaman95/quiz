@@ -1,11 +1,16 @@
-from app import app, mongo
-from flask import render_template, jsonify
+from app import app
+from flask import render_template, flash, redirect
+from app.forms import LoginForm
 
 @app.route('/')
 @app.route('/index')
 def index():
-    ques_list = mongo.db.quiz.find()
-    # print('ques_list: ' + jsonify(ques_list))
-    # print(render_template('index.html', ques_list=ques_list))
-    return render_template('index.html', ques_list=ques_list)
-    # return "Hello, World! to the Quiz app"
+    return render_template('index.html', user={"username": "aman"})
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        flash("Log in successful for user {}, remembern user: {}".format(form.username.data, form.remember_me.data))
+        return redirect('/index')
+    return render_template('login.html', title="Sign In", form=form)

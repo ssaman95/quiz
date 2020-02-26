@@ -1,16 +1,5 @@
-<html>
-    <head>
-        <title>Quiz</title>
-    </head>
-    <body>
-        {% for quest in ques_list %}
-            <b>{{ quest["ques"] }}</b>
-            <br>
-            (A) {{ quest["opt1"] }}
-            (B) {{ quest["opt2"] }}
-            (C) {{ quest["opt3"] }}
-            (D) {{ quest["opt4"] }}
-            <br>
-        {% endfor %}
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hi, {{ user.username }}!</h1>
+{% endblock %}
